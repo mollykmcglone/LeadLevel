@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: lead_level_development
+
+test:
+  adapter: postgresql
+  database: lead_level_test
