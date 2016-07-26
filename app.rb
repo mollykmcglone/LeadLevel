@@ -12,11 +12,11 @@ post('/places') do
   address = params['address']
   name = params['name']
   @@new_places = Place.where(address_line1: address)
-  if @@new_places
+  if @@new_places != []
     redirect('/places')
   else
     @@new_places = Place.where(name: name)
-    if @@new_places
+    if @@new_places != []
       redirect('/places')
     else
       ('/places/new')
