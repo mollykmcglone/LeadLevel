@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <h1>Can I drink the water?</h1>
+  <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
+  <div class= "row">
+  <div class="col-sm-5 col-sm-offset-1">
+    <form action="/places/search" method="post">
+      <div class="form-group">
+        <label for="address">Find Place by Address:</label>
+        <input class="form-control input-lg" type="text" name="address">
+      </div>
+  </div>
+  <div class="col-sm-5">
+    <div class="form-group">
+      <label for="name">Find Place by Name:</label>
+      <input class="form-control input-lg" type="text" name="name">
+    </div>
+  </div>
+  <div class= "row">
+    <div class="col-sm-4 col-sm-offset-4">
+    <button type='submit' class="btn btn-success btn-lg btn-block">Begin</button>
+    </form>
+    </div>
+  </div>
+</div>
