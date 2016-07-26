@@ -19,7 +19,7 @@ post('/places') do
     if @@new_places != []
       redirect('/places')
     else
-      ('/places/new')
+      erb(:places_form)
     end
   end
 end
