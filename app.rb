@@ -1,3 +1,4 @@
+require('pry')
 require("bundler/setup")
 Bundler.require(:default)
 
@@ -7,17 +8,27 @@ get('/') do
   erb(:index)
 end
 
-post('/places/search') do
+post('/places') do
   address = params['address']
+  name = params['name']
   @@new_places = Place.where(address_line1: address)
   if @@new_places
-    redirect('/places/batches')
+    redirect('/places')
   else
-    erb(:places_form)
+    @@new_places = Place.where(name: name)
+    if @@new_places
+      redirect('/places')
+    else
+      ('/places/new')
+    end
   end
 end
 
-get('/places/batches') do
+get('/places') do
   @@new_places
-  erb(:places_specify)
+  erb(:places)
+end
+
+get('places/new') do
+  erb(:places_form)
 end

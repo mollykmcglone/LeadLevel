@@ -1,0 +1,6 @@
+<h1> We found x places...</h1>
+<ul>
+<% @@new_places.each do |new_place| %>
+  <li><h2><%= new_place.name if new_place.name %></h2> <%= new_place.address_line1 %>, <%= new_place.address_line2 %></li>
+<% end %>
+</ul>
