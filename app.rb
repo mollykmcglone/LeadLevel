@@ -45,3 +45,30 @@ end
 get('places/new') do
   erb(:places_form)
 end
+
+post("/places/new") do
+  name = params['name']
+  street_number = params['street_number']
+  street_name = params['street_name']
+  street_direction = params['street_direction']
+  street_type = params['street_type']
+  apt = params['apt']
+  suite = params['suite']
+  city = params['city']
+  state = params['state']
+  zipcode = params['zipcode']
+  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  if apt != nil
+    address_line2 = apt
+  elsif suite != nil
+    address_line2 = suite
+  else
+    address_line2 = nil
+  end
+  @new_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode})
+  if @new_place.save()
+    redirect('/places/'.concat(@new_place.id().to_s()))
+  else
+    erb(:errors)
+  end
+end
