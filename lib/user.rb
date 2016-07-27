@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
 
   validates(:user_name, {:presence => true, :length => {:maximum => 50}})
   validates(:user_name, {:uniqueness => true})
-
+  validates(:password, {:length => 7..20})
 
 end
