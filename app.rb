@@ -23,11 +23,10 @@ post('/places/address') do
   street_name = params['street_name']
   street_direction = params['street_direction']
   street_type = params['street_type']
-  apt = params['apt']
-  address = street_number.concat(street_name).concat(street_direction).concat(street_type).concat(apt)
-  @new_place = Place.where(address_line1: address)
-  if @new_place
-    redirect('/places/'.concat(@new_place.id().to_s()))
+  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  @@places = Place.where(address_line1: address)
+  if @@places != []
+    redirect('/places')
   else
     erb(:places_form)
   end
@@ -35,6 +34,11 @@ end
 
 get('/places/:id') do
   @place = Place.find(params['id'].to_i())
+  erb(:place)
+end
+
+get('/places') do
+  @@places
   erb(:places)
 end
 
