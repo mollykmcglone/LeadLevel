@@ -4,9 +4,61 @@ Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
+
 get('/') do
   erb(:index)
 end
+
+get('/create') do
+  erb(:user_form)
+end
+
+post('/user/new') do
+  user_name = params.fetch('user_name')
+  password = params.fetch('password')
+  password_confirmation = params.fetch('password_confirmation')
+  if password == password_confirmation
+    user = User.new({:user_name => user_name, :password => password})
+    if user.save()
+      User.create({:user_name => user_name, :password => password})
+      erb(:index)
+    end
+    erb(:errors)
+  else
+    erb(:errors)
+  end
+end
+
+get('/login') do
+  erb(:login)
+end
+
+
+post('/login') do
+  user_name = params.fetch('user_name')
+  password = params.fetch('password')
+  user = User.find_by(user_name: user_name)
+  if user != []
+    if user.password() == password
+      id = user.id
+      redirect to("/#{id}")
+    else
+      redirect to("/errors")
+    end
+  else
+    redirect to("/errors")
+  end
+end
+
+
+get('/errors') do
+  erb(:errors)
+end
+
+get('/:id') do
+  erb(:index)
+end
+
 
 post('/places/name') do
   name = params['name']
