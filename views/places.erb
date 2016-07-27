@@ -1,6 +1,6 @@
 <h1> We found x places...</h1>
 <ul>
 <% @@places.each do |place| %>
-  <li><h2><%= place.name if place.name %></h2> <%= place.address_line1 %>, <%= place.address_line2 %></li>
+  <li><h2><a href="/places/<%= place.id() %>"><%= place.name if place.name %></a></h2> <%= place.address_line1 %>, <%= place.address_line2 %></li>
 <% end %>
 </ul>

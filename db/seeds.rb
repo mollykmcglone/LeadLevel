@@ -4,8 +4,8 @@ require './lib/result.rb'
 require './lib/user.rb'
 
 place_list = [
-  [ '400 SW 6th Ave', 'Suite 900', 'Portland', 'Oregon', '97204', 'Harland Financial Solutions'],
-  [ '400 SW 6th Ave', 'Suite 600', 'Portland', 'OR', '', 'UTi'],
+  [ '400 SW 6th Avenue', 'Suite 900', 'Portland', 'Oregon', '97204', 'Harland Financial Solutions'],
+  [ '400 SW 6th Avenue', 'Suite 600', 'Portland', 'OR', '', 'UTi'],
   ['3936 SE Sherman Street', 'Apartment 13', 'Portland', 'Oregon', ''],
   ['3936 SE Sherman Street', 'Apartment 5', 'Portland', 'Oregon', ''],
   ['3936 SE Sherman Street', 'Apartment 7', 'Portland', 'Oregon', ''],

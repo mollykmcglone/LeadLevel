@@ -11,7 +11,7 @@ end
 post('/places/name') do
   name = params['name']
   @place = Place.find_by(name: name)
-  if @place != ''
+  if @place != nil
     redirect('/places/'.concat(@place.id().to_s()))
   else
     erb(:places_form)
