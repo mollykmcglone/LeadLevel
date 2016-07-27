@@ -1,0 +1,105 @@
+<h1> We don't have information about that address yet.</h1>
+<h2>Add the place to our database</h2>
+
+
+<div class= "row">
+  <div class="col-sm-4 col-sm-offset-1">
+  <form action="/places/new" method="post">
+    <div class="form-group">
+      <label for="name">Name (if it is a business, school or other public buildings):</label>
+      <input class="form-control input-lg" type="text" name="name">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2 col-sm-offset-1">
+    <div class="form-group">
+      <label for="street_number">Street Number:</label>
+      <input class="form-control input-lg" type="text" name="street_number">
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <div class="form-group">
+      <label for="street_direction">Direction:</label>
+      <select class="form-control input-lg" type="text" name="street_direction">
+        <option value="" name=""></option>
+        <option value="SE" name="SE">SE</option>
+        <option value="NE" name="NE">NE</option>
+        <option value="SW" name="SW">SW</option>
+        <option value="NW" name="NW">NW</option>
+        <option value="N" name="N">N</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="form-group">
+      <label for="street_name">Street Name:</label>
+      <input class="form-control input-lg" type="text" name="street_name">
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="form-group">
+      <label for="street_type">Street type:</label>
+      <select class="form-control input-lg" type="text" name="street_type">
+        <option value="" name=""></option>
+        <option value="Street" name="Street">Street</option>
+        <option value="Avenue" name="Avenue">Avenue</option>
+        <option value="Court" name="Court">Court</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2 col-sm-offset-1">
+    <div class="form-group">
+      <label for="apt">Apartment Number:</label>
+      <input class="form-control input-lg" type="text" name="apt">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2 col-sm-offset-1">
+    <div class="form-group">
+      <label for="suite">Suite Number:</label>
+      <input class="form-control input-lg" type="text" name="suite">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input class="form-control input-lg" type="text" name="city">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="form-group">
+      <label for="state">State:</label>
+      <input class="form-control input-lg" type="text" name="state">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="form-group">
+      <label for="zipcode">Zipcode:</label>
+      <input class="form-control input-lg" type="text" name="zipcode">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <br><button type='submit' class="btn btn-success btn-lg">Create this place</button>
+  </div>
+
+  </form>
+</div>
