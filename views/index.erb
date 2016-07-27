@@ -1,24 +1,59 @@
 <div class="jumbotron">
   <h1>Can I drink the water?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
-  <div class= "row">
-  <div class="col-sm-5 col-sm-offset-1">
-    <form action="/places" method="post">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-2">
       <div class="form-group">
-        <label for="address">Find Place by Address:</label>
-        <input class="form-control input-lg" type="text" name="address">
+        <label for="name">Find Place by Name:</label>
+        <input class="form-control input-lg" type="text" name="name">
       </div>
-  </div>
-  <div class="col-sm-5">
-    <div class="form-group">
-      <label for="name">Find Place by Name:</label>
-      <input class="form-control input-lg" type="text" name="name">
     </div>
-  </div>
-  <div class= "row">
-    <div class="col-sm-4 col-sm-offset-4">
-    <button type='submit' class="btn btn-success btn-lg btn-block">Begin</button>
+    <div class="col-sm-2">
+    <br><button type='submit' class="btn btn-success btn-lg btn-block">Find</button>
     </form>
     </div>
+  </div>
+  <div class= "row">
+    <div class="col-sm-2 col-sm-offset-2">
+    <form action="/places" method="post">
+      <div class="form-group">
+        <label for="street_number">Street Number:</label>
+        <input class="form-control input-lg" type="text" name="street_number">
+      </div>
+    </div>
+    <div class="col-sm-1 col-sm-offest-1">
+      <div class="form-group">
+        <label for="street_direction">Direction:</label>
+        <select class="form-control input-lg" type="text" name="address">
+          <option value="" name=""></option>
+          <option value="SE" name="SE">SE</option>
+          <option value="NE" name="NE">NE</option>
+          <option value="SW" name="SW">SW</option>
+          <option value="NW" name="NW">NW</option>
+          <option value="N" name="N">N</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-group">
+        <label for="">Label:</label>
+        <select class="form-control input-lg" type="text" name="label">
+          <option value="" name=""></option>
+          <option value="Street" name="Street">Street</option>
+          <option value="Avenue" name="Avenue">Avenue</option>
+          <option value="Court" name="Court">Court</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label for="apt">Apt. or Suite #:</label>
+        <input class="form-control input-lg" type="text" name="apt">
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <br><button type='submit' class="btn btn-success btn-lg btn-block">Find</button>
+    </div>
+    </form>
   </div>
 </div>
