@@ -4,7 +4,7 @@ describe(User) do
   describe('#contact') do
     it("belongs to a contact") do
       test_contact = Contact.create({:email_address => "Molly@gmail.com"})
-      test_user = User.create({:first_name => "Molly", :contact_id => test_contact.id()})
+      test_user = User.create({:last_name => "what", :password => "blank", :user_name => "natth", :first_name => "Molly", :contact_id => test_contact.id()})
       expect(test_user.contact()).to(eq(test_contact))
     end
   end
