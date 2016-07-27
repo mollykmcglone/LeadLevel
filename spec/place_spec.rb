@@ -22,7 +22,7 @@ describe(Place) do
   describe("#contact") do
     it("belongs to a contact") do
       test_contact = Contact.create({:email_address => "abc@example.com"})
-      test_place = Place.create({:address_line1 => "400 SW 6th Avenue", :contacts_id => test_contact.id()})
+      test_place = Place.create({:address_line1 => "400 SW 6th Avenue", :contact_id => test_contact.id()})
       expect(test_place.contact()).to(eq(test_contact))
     end
   end
