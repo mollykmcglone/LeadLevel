@@ -13,7 +13,15 @@ place_list = [
   ['3444 SE Division Street', 'Portland', 'Oregon']
 ]
 
+test_user = [
+  ['test_matthew', 'password'],
+  ['user', 'matthew']
+]
 
 place_list.each do |address_line1, address_line2, city, state, zipcode, name|
   Place.create( address_line1: address_line1, address_line2: address_line2, city: city, zipcode: zipcode, state: state, name: name)
+end
+
+test_user.each do |what, fuck|
+  User.create( user_name: what, password: fuck)
 end

@@ -20,7 +20,6 @@ post('/user/new') do
   if password == password_confirmation
     user = User.new({:user_name => user_name, :password => password})
     if user.save()
-      User.create({:user_name => user_name, :password => password})
       erb(:index)
     else
       @error = "cannot save"
