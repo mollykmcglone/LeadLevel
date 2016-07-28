@@ -100,6 +100,7 @@ post('/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+
   @@places = Place.where(address_line1: address.upcase())
   if @@places != []
     redirect('/places')
@@ -117,6 +118,7 @@ post('/loggedin/:id/places/address') do
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
   @@places = Place.where(address_line1: address.upcase())
+
   if @@places != []
     redirect('/places')
   else
@@ -157,7 +159,15 @@ post("/places/new") do
   else
     address_line2 = nil
   end
-  @new_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode})
+
+  contact_email = params['contact_email']
+  contact_phone = params['contact_phone']
+  first_name = params['contact_first_name']
+  last_name = params['contact_last_name']
+  @new_contact = Contact.new(email_address: contact_email, phone_number: contact_phone, first_name: first_name, last_name: last_name)
+  @new_contact.save()
+  contact_id = @new_contact.id()
+  @new_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id})
   @new_place.save()
 
   if @new_place.save()

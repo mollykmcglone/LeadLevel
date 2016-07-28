@@ -9,7 +9,8 @@ place_list = [
   ['3936 SE Sherman Street', 'Apartment 13', 'Portland', 'Oregon'],
   ['3936 SE Sherman Street', 'Apartment 5', 'Portland', 'Oregon'],
   ['3936 SE Sherman Street', 'Apartment 7', 'Portland', 'Oregon'],
-  ['4026 SE Stark Street', 'Apartment 3', 'Portland', 'Oregon']
+  ['4026 SE Stark Street', 'Apartment 3', 'Portland', 'Oregon'],
+  ['3444 SE Division Street', 'Portland', 'Oregon']
 ]
 
 
