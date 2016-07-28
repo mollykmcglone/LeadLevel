@@ -130,6 +130,48 @@ get('/places/:id') do
   erb(:place)
 end
 
+delete('/places/:id') do
+  place = Place.find(params.fetch('id').to_i)
+  place.destroy()
+  redirect('/')
+end
+
+get '/places/:id/edit' do
+  @place = Place.find(params['id'].to_i())
+  erb(:edit_places_form)
+end
+
+patch '/places/:id/edit' do
+  @place = Place.find(params['id'].to_i())
+  name = params['name']
+  street_number = params['street_number']
+  street_name = params['street_name']
+  street_direction = params['street_direction']
+  street_type = params['street_type']
+  apt = params['apt']
+  suite = params['suite']
+  city = params['city']
+  state = params['state']
+  zipcode = params['zipcode']
+  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  if apt != nil
+    address_line2 = apt
+  elsif suite != nil
+    address_line2 = suite
+  else
+    address_line2 = nil
+  end
+  contact_email = params['contact_email']
+  contact_phone = params['contact_phone']
+  first_name = params['contact_first_name']
+  last_name = params['contact_last_name']
+
+  contact_id = @current_contact.id()
+  @current_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id})
+  @current_place = Place.update({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id})
+  erb(:edit_places_form)
+end
+
 get('/places') do
   @@places
   erb(:places)
