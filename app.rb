@@ -76,21 +76,28 @@ post("/places/new") do
   end
 end
 
+get ('/result/:id/new') do
+  @place = Place.find(params['id'].to_i())
+  erb(:result_form)
+end
 
-
-post('/places/:id/results') do
+post('/result/:id') do
   test_date = params['test_date']
   lab = params['lab']
   over_limit = params['over_limit']
-  user_id = params['user_id']
-  place_id = params['place_id']
-  @result = Result.create({test_date: test_date, lab: lab, over_limit: over_limit, user_id: user_id, place_id: place_id})
-  if @result.over_limit = true
-    place = Place.find(@result.place_id)
-    place.rating = "red"
+  @user = User.find(params['id'].to_i())
+  @place = Place.find(params['id'].to_i())
+  @result = Result.new({test_date: test_date, lab: lab, over_limit: over_limit, user_id: @user.id, place_id: @place.id})
+  if @result.save()
+    if @result.over_limit = true
+      place = Place.find(@result.place_id)
+      place.rating = "red"
+    else
+      place = Place.find(@result.place_id)
+      place.rating = "green"
+    end
+    redirect("/places/".concat(@place.id().to_s()))
   else
-    place = Place.find(@result.place_id)
-    place.rating = "green"
+    erb(:errors)
   end
-  
 end
