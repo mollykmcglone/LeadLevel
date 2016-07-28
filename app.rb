@@ -68,7 +68,7 @@ end
 
 
 post('/places/name') do
-  name = params['name']
+  name = params['name'].upcase()
   @place = Place.find_by(name: name)
   if @place != nil
     redirect('/places/'.concat(@place.id().to_s()))
@@ -100,6 +100,7 @@ post('/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  address.upcase()
   @@places = Place.where(address_line1: address)
   if @@places != []
     redirect('/places')
@@ -158,6 +159,8 @@ post("/places/new") do
     address_line2 = nil
   end
   @new_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode})
+  @new_place.save()
+
   if @new_place.save()
     redirect('/places/'.concat(@new_place.id().to_s()))
   else
