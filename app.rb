@@ -294,6 +294,16 @@ get('/loggedin/:user_id/watch/:id') do
   id = params.fetch('user_id').to_i()
   place = Place.find(params['id'].to_i())
   user = User.find(id)
-  user.places.push(place)
+  if !user.places.include?(place)
+    user.places.push(place)
+  end
+  redirect("/loggedin/#{id}/profile")
+end
+
+get('/loggedin/:user_id/unwatch/:id') do
+  id = params.fetch('user_id').to_i()
+  place = Place.find(params['id'].to_i())
+  user = User.find(id)
+  user.places.delete(place)
   redirect("/loggedin/#{id}/profile")
 end

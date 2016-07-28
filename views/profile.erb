@@ -4,7 +4,7 @@
 <% if @user.places.any?() %>
   <ul>
     <% @user.places.each() do |place| %>
-      <li><a href="/loggedin/<%= @user.id() %>/places/<%= place.id() %>"><%= place.name() %></a> <%= place.rating() %></li>
+      <li><a href="/loggedin/<%= @user.id() %>/places/<%= place.id() %>"><%= place.name() %></a> current rating: <%= place.rating() %> <a href="/loggedin/<%= @user.id() %>/unwatch/<%= place.id() %>">unwatch</a></li>
     <% end %>
   </ul>
 <% else %>
