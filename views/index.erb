@@ -2,7 +2,11 @@
   <h1>Can I drink the water?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
   <div class="row">
-    <form action="/places/name" method="post">
+    <% if url.include?("loggedin") %>
+      <form action="/loggedin/<%= @user.id() %>/places/name" method="post">
+    <% else %>
+      <form action="/places/name" method="post">
+    <% end %>
     <div class="col-sm-6 col-sm-offset-2">
       <div class="form-group">
         <label for="name">Search by Place Name:</label>
@@ -15,8 +19,12 @@
     </form>
   </div>
   <div class= "row">
-    <form action="/places/address" method="post">
     <div class="col-sm-2 col-sm-offset-1">
+      <% if url.include?("loggedin") %>
+        <form action="/loggedin/<%= @user.id() %>/places/address" method="post">
+      <% else %>
+        <form action="/places/address" method="post">
+      <% end %>
       <div class="form-group">
         <label for="street_number">Street Number:</label>
         <input class="form-control input-lg" type="text" name="street_number">

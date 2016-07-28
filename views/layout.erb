@@ -10,11 +10,20 @@
     <div class="container-fluid">
       <header class="page-header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="/brands">Brands</a></li>
-          <li class="active"><a href="/stores">Stores</a></li>
+          <% if url.include?("loggedin") %>
+          <li class="active"><a href="/logout">Logout</a></li>
+          <li class="active"><a href="/loggedin/profile/<%= @user.id() %>">Profile</a></li>
+          <% else %>
+          <li class="active"><a href="/create">Create User</a></li>
+          <li class="active"><a href="/login">Login</a></li>
           <li class="active"><a href="/">Home</a></li>
+          <% end %>
         </ul>
-        <h3><a href="/">Lead Level</a></h3>
+        <% if url.include?("loggedin") %>
+          <h3><a href="/loggedin/<%= @user.id() %>">Lead Level</a></h3>
+        <% else %>
+          <h3><a href="/">Lead Level</a></h3>
+        <% end %>
       </header>
       <div class="pages">
       <%= yield %>
