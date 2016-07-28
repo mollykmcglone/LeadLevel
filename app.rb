@@ -176,6 +176,7 @@ get('/loggedin/profile/:id') do
   @user = User.find(id)
   @places = @user.places()
   erb(:profile)
+end
 
 get ('/result/:id/new') do
   @place = Place.find(params['id'].to_i())
