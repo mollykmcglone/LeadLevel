@@ -10,13 +10,13 @@ place_list = [
   ['3936 SE Sherman Street', 'Apartment 5', 'Portland', 'Oregon'],
   ['3936 SE Sherman Street', 'Apartment 7', 'Portland', 'Oregon'],
   ['4026 SE Stark Street', 'Apartment 3', 'Portland', 'Oregon'],
-  ['3444 SE Division Street', 'Portland', 'Oregon']
-  ['2276 SE 41st Avenue', 'Portland', 'Oregon', '97214', 'George Middle School']
+  ['3444 SE Division Street', '', 'Portland', 'Oregon', '97214'],
+  ['2276 SE 41st Avenue', '', 'Portland', 'Oregon', '97214', 'George Middle School', 'red']
 ]
 
 user_list = [
   ['test_matthew', 'password'],
-  ['user', 'password']
+  ['user', 'password'],
   ['user2', 'password']
 ]
 
@@ -24,8 +24,8 @@ result_list = [
   ['Portland Water Bureau', 'true', '2016-06-15', '8', '1']
 ]
 
-place_list.each do |address_line1, address_line2, city, state, zipcode, name|
-  Place.create( address_line1: address_line1, address_line2: address_line2, city: city, zipcode: zipcode, state: state, name: name)
+place_list.each do |address_line1, address_line2, city, state, zipcode, name, rating|
+  Place.create( address_line1: address_line1, address_line2: address_line2, city: city, zipcode: zipcode, state: state, name: name, rating: rating)
 end
 
 user_list.each do |user_name, password|
