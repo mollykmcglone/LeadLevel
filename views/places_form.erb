@@ -4,10 +4,14 @@
 
 <div class= "row">
   <div class="col-sm-4 col-sm-offset-1">
-  <form action="/places/new" method="post">
+    <% if url.include?("loggedin") %>
+      <form action="/loggedin/<%= @user.id() %>/places/new" method="post">
+    <% else %>
+      <form action="/places/new" method="post">
+    <% end %>
     <div class="form-group">
       <label for="name">Name (if it is a business, school or other public buildings):</label>
-      <input class="form-control input-lg" type="text" name="name">
+      <input class="form-control input-lg" type="text" name="name" required>
     </div>
   </div>
 </div>
