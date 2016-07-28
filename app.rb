@@ -22,9 +22,12 @@ post('/user/new') do
     if user.save()
       User.create({:user_name => user_name, :password => password})
       erb(:index)
+    else
+      @error = "cannot save"
+      erb(:errors)
     end
-    erb(:errors)
   else
+    @error = "passwords do not match"
     erb(:errors)
   end
 end
@@ -38,15 +41,17 @@ post('/login') do
   user_name = params.fetch('user_name')
   password = params.fetch('password')
   user = User.find_by(user_name: user_name)
-  if user != []
+  if user != nil
     if user.password() == password
       id = user.id
       redirect to("/loggedin/#{id}")
     else
-      redirect to("/errors")
+      @error = "password entered in incorrectly"
+      erb(:errors)
     end
   else
-    redirect to("/errors")
+    @error = "user name not found"
+    erb(:errors)
   end
 end
 
@@ -90,6 +95,22 @@ get('/loggedin/:id/places/new') do
 end
 
 post('/places/address') do
+  street_number = params['street_number']
+  street_name = params['street_name']
+  street_direction = params['street_direction']
+  street_type = params['street_type']
+  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  @@places = Place.where(address_line1: address)
+  if @@places != []
+    redirect('/places')
+  else
+    erb(:places_form)
+  end
+end
+
+post('/loggedin/:id/places/address') do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
   street_number = params['street_number']
   street_name = params['street_name']
   street_direction = params['street_direction']

@@ -19,7 +19,11 @@
           <li class="active"><a href="/">Home</a></li>
           <% end %>
         </ul>
-        <h3><a href="/">Lead Level</a></h3>
+        <% if url.include?("loggedin") %>
+          <h3><a href="/loggedin/<%= @user.id() %>">Lead Level</a></h3>
+        <% else %>
+          <h3><a href="/">Lead Level</a></h3>
+        <% end %>
       </header>
       <div class="pages">
       <%= yield %>
