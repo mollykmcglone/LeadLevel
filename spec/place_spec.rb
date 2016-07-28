@@ -14,7 +14,8 @@ describe(Place) do
   describe("#results") do
     it("has many results") do
       test_place = Place.create({:address_line1 => "400 SW 6th Avenue", :city => 'Portland', :state => 'Oregon'})
-      test_result = Result.create({:place_id => test_place.id()})
+      test_result = Result.create({:lab => 'Pixis Laboratory', :over_limit => 'true', :place_id => test_place.id(), :test_date => '2016-05-05', :user_id => 4})
+      test_place.results.push(test_result)
       expect(test_place.results()).to(eq([test_result]))
     end
   end
