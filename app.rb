@@ -250,12 +250,12 @@ post('/result/:id') do
   @place = Place.find(params['id'].to_i())
   @result = Result.new({test_date: test_date, lab: lab, over_limit: over_limit, place_id: @place.id})
   if @result.save()
-    if @result.over_limit = true
-      @place = Place.find(@result.place_id)
-      @place.rating = "red"
-    else
-      @place = Place.find(@result.place_id)
+    if @result.over_limit == false
       @place.rating = "green"
+      @place.save()
+    else
+      @place.rating = "red"
+      @place.save()
     end
     redirect("/places/".concat(@place.id().to_s()))
   else
