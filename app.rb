@@ -41,7 +41,7 @@ post('/login') do
   if user != []
     if user.password() == password
       id = user.id
-      redirect to("/#{id}")
+      redirect to("/loggedin/#{id}")
     else
       redirect to("/errors")
     end
@@ -55,7 +55,7 @@ get('/errors') do
   erb(:errors)
 end
 
-get('/:id') do
+get('/loggedin/:id') do
   erb(:index)
 end
 
@@ -67,6 +67,17 @@ post('/places/name') do
     redirect('/places/'.concat(@place.id().to_s()))
   else
     erb(:places_form)
+  end
+end
+
+post('/loggedin/:id/places/name') do
+  id = params.fetch('id').to_i()
+  name = params['name']
+  @place = Place.find_by(name: name)
+  if @place != nil
+    redirect("/loggedin/#{id}/places/".concat(@place.id().to_s()))
+  else
+    redirect to("/loggedin/#{id}/places/new")
   end
 end
 
