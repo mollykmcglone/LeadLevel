@@ -18,9 +18,9 @@ describe(Result) do
 
   describe('#user') do
     it("says which user posted a result") do
-      test_user = User.create({:user_name => "Molly"})
+      test_user = User.create({:user_name => "Molly", :password => "1234567"})
       test_place = Place.create({:address_line1 => "400 SW 6th Avenue", :city => 'Portland', :state => 'Oregon'})
-      result = Result.create({:lab => 'Pixis Laboratory', :over_limit => 'true', :test_date => '2016-05-05', :user_id => test_user.id, :place_id => test_place.id})
+      result = Result.create({:lab => 'Pixis Laboratory', :over_limit => 'true', :test_date => '2016-05-05', :place_id => test_place.id, :user_id => test_user.id()})
       expect(result.user()).to(eq(test_user))
     end
   end
