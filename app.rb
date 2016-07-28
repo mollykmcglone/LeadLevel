@@ -100,8 +100,7 @@ post('/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-  address.upcase()
-  @@places = Place.where(address_line1: address)
+  @@places = Place.where(address_line1: address.upcase())
   if @@places != []
     redirect('/places')
   else
@@ -117,7 +116,7 @@ post('/loggedin/:id/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-  @@places = Place.where(address_line1: address)
+  @@places = Place.where(address_line1: address.upcase())
   if @@places != []
     redirect('/places')
   else
