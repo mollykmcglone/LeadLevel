@@ -21,7 +21,7 @@ describe(User) do
   describe("#place") do
     it("has many places") do
       test_user = User.create({:user_name => "Molly"})
-      test_place = Place.create({:city => ["Portland"]})
+      test_place = Place.create({:address_line1 => "400 SW 6th Avenue", :city => 'Portland', :state => 'Oregon'})
       test_user.places.push(test_place)
       expect(test_user.places()).to(eq([test_place]))
     end
