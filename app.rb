@@ -56,6 +56,8 @@ get('/errors') do
 end
 
 get('/loggedin/:id') do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
   erb(:index)
 end
 
@@ -79,6 +81,12 @@ post('/loggedin/:id/places/name') do
   else
     redirect to("/loggedin/#{id}/places/new")
   end
+end
+
+get('/loggedin/:id/places/new') do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
+  erb(:places_form)
 end
 
 post('/places/address') do
@@ -134,4 +142,15 @@ post("/places/new") do
   else
     erb(:errors)
   end
+end
+
+get('/logout') do
+  erb(:loggedout)
+end
+
+get('/loggedin/profile/:id') do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
+  @places = @user.places()
+  erb(:profile)
 end

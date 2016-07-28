@@ -2,7 +2,11 @@
   <h1>Can I drink the water?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
   <div class="row">
-    <form action="/places/name" method="post">
+    <% if url.include?("loggedin") %>
+      <form action="/loggedin/<%= @user.id() %>/places/name" method="post">
+    <% else %>
+      <form action="/places/name" method="post">
+    <% end %>
     <div class="col-sm-6 col-sm-offset-2">
       <div class="form-group">
         <label for="name">Blah blah!:</label>

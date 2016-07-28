@@ -10,9 +10,14 @@
     <div class="container-fluid">
       <header class="page-header">
         <ul class="nav nav-pills pull-right">
+          <% if url.include?("loggedin") %>
+          <li class="active"><a href="/logout">Logout</a></li>
+          <li class="active"><a href="/loggedin/profile/<%= @user.id() %>">Profile</a></li>
+          <% else %>
           <li class="active"><a href="/create">Create User</a></li>
           <li class="active"><a href="/login">Login</a></li>
           <li class="active"><a href="/">Home</a></li>
+          <% end %>
         </ul>
         <h3><a href="/">Lead Level</a></h3>
       </header>
