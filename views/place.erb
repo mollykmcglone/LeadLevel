@@ -5,9 +5,9 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
       <h2 class="center">Should you drink here?</h2>
-      <% if @place.rating = 'red' %>
+      <% if @place.rating == 'red' %>
         <h3 class="center" id="red">No! The drinking water here has dangerous levels of lead.</h3>
-      <% elsif @place.rating = 'green' %>
+      <% elsif @place.rating == 'green' %>
         <h3 class="center" id="green">Go ahead! The drinking water has been tested and is safe.</h3>
       <% else %>
       <h3 class="center" id="yellow">Drink with caution- the water here hasn't been tested.</h3>
@@ -20,7 +20,7 @@
       <% if @place.results().any?() %>
       <ul>
         <% @place.results.each do |result| %>
-        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>,
+        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: 
         <% if result.over_limit() %>
           Water from drinking faucet(s) or fountain(s) tested over the 15ppm EPA limit.
           <% else %>
@@ -38,7 +38,11 @@
 
   <div class="row">
     <div class="col-sm-2 col-sm-offset-2">
-      <p><a class="btn btn-success btn-lg btn-block" href="/result/<%= @place.id() %>/new">Add a testing result</a></p>
+      <% if url.include?("loggedin") %>
+        <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing result</a></p>
+      <% else %>
+        <p><a class="btn btn-success btn-lg btn-block" href="/result/<%= @place.id() %>/new">Add a testing result</a></p>
+      <% end %>
     </div>
     <div class="col-sm-2">
       <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place info</a></p>
