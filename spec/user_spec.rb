@@ -9,11 +9,12 @@ describe(User) do
     end
   end
 
-  describe("#result") do
-    it("has many results") do
+  describe("#results") do
+    it("lets you see the results created by the user") do
       test_place = Place.create({:city => "Portland"})
-      test_user = User.create({:user_name => "Molly", :password => "password"})
-      test_result = Result.create({:place_id => test_place.id(), :user_id => test_user.id()})
+      test_user = User.create({:user_name => "Molly"})
+      test_result = Result.create({:lab => 'Pixis Laboratory', :over_limit => 'true', :place_id => test_place.id(), :test_date => '2016-05-05', user_id: test_user.id()})
+      test_user.results.push(test_result)
       expect(test_user.results()).to(eq([test_result]))
     end
   end

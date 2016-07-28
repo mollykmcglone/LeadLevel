@@ -176,4 +176,29 @@ get('/loggedin/profile/:id') do
   @user = User.find(id)
   @places = @user.places()
   erb(:profile)
+
+get ('/result/:id/new') do
+  @place = Place.find(params['id'].to_i())
+  erb(:result_form)
+end
+
+post('/result/:id') do
+  test_date = params['test_date']
+  lab = params['lab']
+  over_limit = params['over_limit']
+  @user = User.find(params['id'].to_i())
+  @place = Place.find(params['id'].to_i())
+  @result = Result.new({test_date: test_date, lab: lab, over_limit: over_limit, user_id: @user.id, place_id: @place.id})
+  if @result.save()
+    if @result.over_limit = true
+      place = Place.find(@result.place_id)
+      place.rating = "red"
+    else
+      place = Place.find(@result.place_id)
+      place.rating = "green"
+    end
+    redirect("/places/".concat(@place.id().to_s()))
+  else
+    erb(:errors)
+  end
 end
