@@ -20,7 +20,7 @@
       <% if @place.results().any?() %>
       <ul>
         <% @place.results.each do |result| %>
-        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by:
+        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: <%=result.user.user_name()%>
         <% if result.over_limit() %>
           Water from drinking faucet(s) or fountain(s) tested over the 15ppm EPA limit.
           <% else %>
@@ -41,7 +41,7 @@
       <% if url.include?("loggedin") %>
         <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing result</a></p>
       <% else %>
-        <p><a class="btn btn-success btn-lg btn-block" href="/result/<%= @place.id() %>/new">Add a testing result</a></p>
+        <p><a class="btn btn-success btn-lg btn-block" href="/login">log in to add a result</a></p>
       <% end %>
     </div>
     <div class="col-sm-2">

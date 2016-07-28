@@ -1,6 +1,9 @@
 <h1 class="center"> Create a new testing report for <%= @place.name %> </h1>
-
+<% if url.include?("loggedin") %>
+<form action="/loggedin/<%= @user.id() %>/result/<%= @place.id %>" method="post">
+<% else %>
 <form action="/result/<%= @place.id %>" method="post">
+<% end %>
 <div class= "row">
   <div class="col-sm-4 col-sm-offset-4">
     <div class="form-group">

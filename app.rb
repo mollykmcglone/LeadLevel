@@ -217,6 +217,11 @@ get('/loggedin/:user_id/places/:id') do
   id = params.fetch('user_id').to_i()
   @user = User.find(id)
   @place = Place.find(params['id'].to_i())
+  users = User.all()
+  @users = []
+  users.each() do |user|
+    @users.push(user.user_name())
+  end
   erb(:place)
 end
 
@@ -271,6 +276,7 @@ post('/loggedin/:user_id/result/:id') do
   over_limit = params['over_limit']
   @place = Place.find(params['id'].to_i())
   @result = Result.new({test_date: test_date, lab: lab, over_limit: over_limit, place_id: @place.id, user_id: @user.id()})
+  binding.pry
   if @result.save()
     if @result.over_limit = true
       @place = Place.find(@result.place_id)
@@ -279,7 +285,7 @@ post('/loggedin/:user_id/result/:id') do
       @place = Place.find(@result.place_id)
       @place.rating = "green"
     end
-    redirect("/places/".concat(@place.id().to_s()))
+    redirect("/loggedin/#{id}/places/".concat(@place.id().to_s()))
   else
     erb(:errors)
   end
