@@ -75,3 +75,22 @@ post("/places/new") do
     erb(:errors)
   end
 end
+
+
+
+post('/places/:id/results') do
+  test_date = params['test_date']
+  lab = params['lab']
+  over_limit = params['over_limit']
+  user_id = params['user_id']
+  place_id = params['place_id']
+  @result = Result.create({test_date: test_date, lab: lab, over_limit: over_limit, user_id: user_id, place_id: place_id})
+  if @result.over_limit = true
+    place = Place.find(@result.place_id)
+    place.rating = "red"
+  else
+    place = Place.find(@result.place_id)
+    place.rating = "green"
+  end
+  
+end

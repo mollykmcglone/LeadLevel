@@ -1,0 +1,27 @@
+<h1 class="center"> Create a new testing report for <%= @place.name %> </h1>
+
+<div class= "row">
+  <div class="col-sm-4 col-sm-offset-1">
+  <form action="/places/new" method="post">
+    <div class="form-group">
+      <label for="name">Date:</label>
+      <input class="form-control input-lg" type="text" name="name">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="form-group">
+      <label for="street_number">Name of the lab that tested the sample:</label>
+      <input class="form-control input-lg" type="text" name="street_number">
+    </div>
+  </div>
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="form-group">
+      <label for="street_direction">Result of the test:</label>
+      <select class="form-control input-lg" type="text" name="street_direction">
+        <option value="true" name="true">Water tested over 15ppm for lead</option>
+        <option value="false" name="false">Water did not test over 15ppm for lead</option>
+      </select>
+    </div>
+  </div>
