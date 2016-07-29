@@ -9,10 +9,10 @@
 .jumbotron p {
   font-weight: bold;
 }
-.jumbotron h1 {
-  font-size: 6em;
+/*.jumbotron h1 {
+  font-size: 4em;
   color: black;
-}
+}*/
 
 @media (max-width: 992px){
   img {
@@ -45,16 +45,18 @@
 }
 
 #first_page {
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;

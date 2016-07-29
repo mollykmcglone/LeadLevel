@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1>Can I drink the water here?</h1>
+  <h1 id="first_page">Can I drink the water here?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
   <div class="row" id="first_page">
     <% if url.include?("loggedin") %>
@@ -18,7 +18,7 @@
     </div>
     </form>
   </div>
-  <div class= "row" id="first_page">
+  <div class= "row">
     <div class="col-sm-2">
       <% if url.include?("loggedin") %>
         <form action="/loggedin/<%= @user.id() %>/places/address" method="post">
