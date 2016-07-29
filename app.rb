@@ -78,7 +78,7 @@ end
 
 post('/loggedin/:id/places/name') do
   id = params.fetch('id').to_i()
-  name = params['name']
+  name = params['name'].upcase()
   @place = Place.find_by(name: name)
   if @place != nil
     redirect("/loggedin/#{id}/places/".concat(@place.id().to_s()))
@@ -99,8 +99,8 @@ post('/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-
-  @@places = Place.where(address_line1: address.upcase())
+  address1 = address.upcase()
+  @@places = Place.where(address_line1: address1)
   if @@places != []
     redirect('/places')
   else
@@ -116,8 +116,8 @@ post('/loggedin/:id/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-  @@places = Place.where(address_line1: address.upcase())
-
+  address1 = address.upcase()
+  @@places = Place.where(address_line1: address1)
   if @@places != []
     redirect('/places')
   else
@@ -144,32 +144,46 @@ end
 patch '/places/:id/edit' do
   @place = Place.find(params['id'].to_i())
   name = params['name']
-  street_number = params['street_number']
-  street_name = params['street_name']
-  street_direction = params['street_direction']
-  street_type = params['street_type']
-  apt = params['apt']
-  suite = params['suite']
-  city = params['city']
-  state = params['state']
-  zipcode = params['zipcode']
-  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-  if apt != nil
-    address_line2 = apt
-  elsif suite != nil
-    address_line2 = suite
-  else
-    address_line2 = nil
+  if name == ''
+    name = @place.name()
   end
-  contact_email = params['contact_email']
-  contact_phone = params['contact_phone']
+  address_line1 = params['address_line1']
+  if address_line1 == nil
+    address_line1 = @place.address_line1()
+  else
+    address_line1 = address_line1.upcase()
+  end
+  address_line2 = params['address_line2']
+  if address_line2 == ''
+    address_line2 = @place.address_line2()
+  end
+  city = params['city']
+  if city == ''
+    city = @place.city()
+  end
+  state = params['state']
+  if state == ''
+    state = @place.state()
+  end
+  zipcode = params['zipcode']
+  if zipcode == ''
+    zipcode = @place.zipcode()
+  end
+  email_address = params['contact_email']
+  phone_number = params['contact_phone']
   first_name = params['contact_first_name']
   last_name = params['contact_last_name']
-
-  contact_id = @current_contact.id()
-  @current_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id})
-  @current_place = Place.update({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id})
-  erb(:edit_places_form)
+  @contact = Contact.find_by(place_id: @place.id())
+    if @contact != nil
+     @contact.update({email_address: email_address, phone_number: phone_number, first_name: first_name, last_name: last_name})
+    else
+     @contact = Contact.create({email_address: email_address, phone_number: phone_number, first_name: first_name, last_name: last_name, place_id: @place.id()})
+    end
+  if @place.update({name: name, address_line1: address_line1, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: @contact.id()})
+    redirect('/places/'.concat(@place.id().to_s()))
+  else
+  erb(:errors)
+  end
 end
 
 get('/places') do
@@ -276,6 +290,22 @@ get('/loggedin/:id/profile') do
   @user = User.find(id)
   @places = @user.places()
   erb(:profile)
+end
+
+post('/loggedin/:id/contact') do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
+  first_name = params['contact_first_name']
+  last_name = params['contact_last_name']
+  phone_number = params['contact_phone']
+  email_address = params['contact_email']
+  @contact = Contact.new({first_name: first_name, last_name: last_name, phone_number: phone_number, email_address: email_address, user_id: @user.id()})
+  if @contact.save()
+    @user.update({contact_id: @contact.id()})
+    redirect("/loggedin/#{id}/profile")
+  else
+    erb(:errors)
+  end
 end
 
 get ('/result/:id/new') do
