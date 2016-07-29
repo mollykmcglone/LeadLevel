@@ -3,8 +3,8 @@ require('spec_helper')
 describe(User) do
   describe('#contact') do
     it("has one contact") do
-      test_user = User.create({:user_name => "Molly", :password => "password"})
-      test_contact = Contact.create({:email_address => "Molly@gmail.com", :user_id => test_user.id()})
+      test_contact = Contact.create({:email_address => "Molly@gmail.com"})
+      test_user = User.create({:user_name => "Molly", :password => "password", contact_id: test_contact.id()})
       expect(test_user.contact()).to(eq(test_contact))
     end
   end
@@ -22,7 +22,7 @@ describe(User) do
   describe("#place") do
     it("has many places") do
       test_user = User.create({:user_name => "Molly", :password => "password"})
-      test_place = Place.create({:city => ["Portland"]})
+      test_place = Place.create({address_line1: "400 sw 6th ave", state: "OR", :city => ["Portland"]})
       test_user.places.push(test_place)
       expect(test_user.places()).to(eq([test_place]))
     end

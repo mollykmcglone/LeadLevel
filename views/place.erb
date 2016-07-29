@@ -48,7 +48,11 @@
       <% end %>
     </div>
     <div class="col-sm-2">
-      <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
+      <% if url.include?("loggedin") %>
+        <p><a class="btn btn-warning btn-lg btn-block" href="/loggedin/<%= @user.id() %>/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
+      <% else %>
+        <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
+      <% end %>
     </div>
     <div class="col-sm-2">
       <% if url.include?("loggedin") %>

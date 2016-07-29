@@ -136,6 +136,13 @@ delete('/places/:id') do
   redirect('/')
 end
 
+get("/loggedin/:user_id/places/:id/edit") do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
+  @place = Place.find(params['id'].to_i())
+  erb(:edit_places_form)
+end
+
 get '/places/:id/edit' do
   @place = Place.find(params['id'].to_i())
   erb(:edit_places_form)
@@ -185,6 +192,54 @@ patch '/places/:id/edit' do
   erb(:errors)
   end
 end
+
+patch '/loggedin/:user_id/places/:id/edit' do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
+  @place = Place.find(params['id'].to_i())
+  name = params['name']
+  if name == ''
+    name = @place.name()
+  end
+  address_line1 = params['address_line1']
+  if address_line1 == nil
+    address_line1 = @place.address_line1()
+  else
+    address_line1 = address_line1.upcase()
+  end
+  address_line2 = params['address_line2']
+  if address_line2 == ''
+    address_line2 = @place.address_line2()
+  end
+  city = params['city']
+  if city == ''
+    city = @place.city()
+  end
+  state = params['state']
+  if state == ''
+    state = @place.state()
+  end
+  zipcode = params['zipcode']
+  if zipcode == ''
+    zipcode = @place.zipcode()
+  end
+  email_address = params['contact_email']
+  phone_number = params['contact_phone']
+  first_name = params['contact_first_name']
+  last_name = params['contact_last_name']
+  @contact = Contact.find_by(place_id: @place.id())
+    if @contact != nil
+     @contact.update({email_address: email_address, phone_number: phone_number, first_name: first_name, last_name: last_name})
+    else
+     @contact = Contact.create({email_address: email_address, phone_number: phone_number, first_name: first_name, last_name: last_name, place_id: @place.id()})
+    end
+  if @place.update({name: name, address_line1: address_line1, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: @contact.id(), user_id: @user.id()})
+    redirect("/loggedin/#{@user.id()}/places/".concat(@place.id().to_s()))
+  else
+  erb(:errors)
+  end
+end
+
 
 get('/places') do
   @@places
