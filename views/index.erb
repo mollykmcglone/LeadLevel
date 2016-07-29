@@ -18,7 +18,7 @@
     </div>
     </form>
   </div>
-  <div class= "row" id="first_page_bottom">
+  <div class= "row">
     <% if url.include?("loggedin") %>
       <form action="/loggedin/<%= @user.id() %>/places/address" method="post">
     <% else %>
@@ -34,7 +34,7 @@
     <div class="col-sm-2">
       <div class="form-group">
         <label for="street_direction" class="sr-only">Direction:</label>
-        <select class="form-control input-lg" type="text" name="street_direction" placeholder="Direction">
+        <select required class="form-control input-lg" type="text" name="street_direction" placeholder="Direction">
           <option value="" selected disabled>Direction</option>
           <option value="SE" name="SE">SE</option>
           <option value="NE" name="NE">NE</option>
@@ -55,7 +55,7 @@
     <div class="col-sm-2">
       <div class="form-group">
         <label for="street_type" class="sr-only">Street type:</label>
-        <select class="form-control input-lg" type="text" name="street_type">
+        <select required class="form-control input-lg" type="text" name="street_type">
           <option value="" selected disabled>Type</option>
           <option value="Street" name="Street">Street</option>
           <option value="Avenue" name="Avenue">Avenue</option>
@@ -70,7 +70,7 @@
   </div>
 </div>
 <div class="well">
-  <div class="row">
+  <div class="row" id="no_margin">
     <h1 class="center"> Lead and Water and Lead and Water and Lead </h1>
     <h2 class="lead center"> Lorem ipsum  Lorem ipsum  Lorem ipsum  Lorem ipsum </h2>
     <p> "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>

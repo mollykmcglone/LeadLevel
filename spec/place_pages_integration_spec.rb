@@ -1,10 +1,10 @@
 require('spec_helper')
+require('launchy')
 
 describe('the places route', :type => :feature) do
 
   it "allows the user to search for a place by address" do
     test_place = Place.create({:name => nil, :address_line1 => "3936 SE SHERMAN STREET", :city => 'PORTLAND', :state => 'OREGON', contact_id: '4', user_id: '5', rating: 'red'})
-    binding.pry
     visit '/'
     fill_in 'street_number', :with => '3936'
     select('SE', :from => 'street_direction')
@@ -20,5 +20,16 @@ describe('the places route', :type => :feature) do
     fill_in 'name', :with => 'Epicodus'
     click_button('Find by Name')
     expect(page).to have_content('EPICODUS')
+  end
+
+  it "allows the user to edit place information" do
+    test_place = Place.create({:name => "EPICODUS", :address_line1 => "400 SW 6th AVENUE", :city => 'PORTLAND', :state => 'OREGON'})
+    visit '/'
+    fill_in 'name', :with => 'Epicodus'
+    click_button('Find by Name')
+    click_link('Edit place info')
+    fill_in 'name', :with => 'Epic Coding'
+    click_button('Submit Changes')
+    expect(page).to have_content('Epic Coding')
   end
 end

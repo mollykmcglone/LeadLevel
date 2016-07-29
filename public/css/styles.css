@@ -69,3 +69,7 @@ ol {
 ul {
   font-size: 1.5em;
 }
+
+#no_margin {
+  margin-top: 0;
+}

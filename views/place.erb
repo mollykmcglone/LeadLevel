@@ -33,7 +33,7 @@
         <% end %>
       <ol>
       <% else %>
-      <p> There are no test results posted for this place yet.</p>
+      <h3 class="center"> There are no test results posted for this place yet.</h3>
       <% end %>
     </div>
   </div>
@@ -42,7 +42,7 @@
   <div class="row">
     <div class="col-sm-2 col-sm-offset-3">
       <% if url.include?("loggedin") %>
-        <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing result</a></p>
+        <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing<br>result</a></p>
       <% else %>
         <p><a class="btn btn-success btn-lg btn-block" href="/login">Log in to add<br> a test result</a></p>
       <% end %>
@@ -51,12 +51,12 @@
       <% if url.include?("loggedin") %>
         <p><a class="btn btn-warning btn-lg btn-block" href="/loggedin/<%= @user.id() %>/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
       <% else %>
-        <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
+        <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place<br> info</a></p>
       <% end %>
     </div>
     <div class="col-sm-2">
       <% if url.include?("loggedin") %>
-      <p><a class="btn btn-primary btn-lg btn-block" href="/loggedin/<%= @user.id() %>/watch/<%= @place.id() %>">Watch</a></p>
+      <p><a class="btn btn-primary btn-lg btn-block" href="/loggedin/<%= @user.id() %>/watch/<%= @place.id() %>">Watch<br>this place</a></p>
       <% else %>
       <p><a class="btn btn-primary btn-lg btn-block" href="/login">Log in to<br>watch place</a></p>
       <% end %>
