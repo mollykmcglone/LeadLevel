@@ -21,7 +21,7 @@
       <% if @place.results().any?() %>
       <ul>
         <% @place.results.each do |result| %>
-        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: <%=result.user.user_name()%>
+        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: <%=result.user.user_name() if result.user%>
         <% if result.over_limit() %>
           Water from drinking faucet(s) or fountain(s) tested over the 15ppm EPA limit.
           <% else %>
@@ -38,23 +38,21 @@
   <br>
 
   <div class="row">
-    <div class="col-sm-2 col-sm-offset-2">
+    <div class="col-sm-2 col-sm-offset-3">
       <% if url.include?("loggedin") %>
         <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing result</a></p>
       <% else %>
-        <p><a class="btn btn-success btn-lg btn-block" href="/login">log in to add a result</a></p>
+        <p><a class="btn btn-success btn-lg btn-block" href="/login">Log in to add<br> a test result</a></p>
       <% end %>
     </div>
     <div class="col-sm-2">
-      <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place info</a></p>
+      <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place<br>info</a></p>
     </div>
     <div class="col-sm-2">
-      <form action="/places/<%= @place.id() %>" method="post">
-        <input name="_method" type="hidden" value="delete">
-        <button type="submit" class="btn btn-danger btn-lg btn-block">Delete place</button>
-      </form><br>
-    </div>
-    <div class="col-sm-2">
+      <% if url.include?("loggedin") %>
       <p><a class="btn btn-primary btn-lg btn-block" href="/loggedin/<%= @user.id() %>/watch/<%= @place.id() %>">Watch</a></p>
+      <% else %>
+      <p><a class="btn btn-primary btn-lg btn-block" href="/login">Log in to<br>watch place</a></p>
+      <% end %>
     </div>
   </div>

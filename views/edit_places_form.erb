@@ -1,17 +1,16 @@
-<h1>We don't have information about that address yet.</h1>
-<h2 class="col-sm-offset-1">Please add this place to our database</h2>
+<h1 class="center title">Edit this Place</h1>
 
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
-      <% if url.includes?("loggedin")%>
+      <% if url.include?("loggedin")%>
         <form action="/loggedin/places/<%= @place.id() %>/edit" method="post">
       <% else %>
         <form action="/places/<%= @place.id() %>/edit" method="post">
       <% end %>
         <input type="hidden" name="_method" value="patch">
     <div class="form-group">
-      <label for="name">Name (if it is a business, school or other public buildings):</label>
-      <input class="form-control input-lg" type="text" name="name" required>
+      <label for="name">Name (only if it's a business, school or public building):</label>
+      <input class="form-control input-lg" type="text" name="name" value="<%= @place.name %>" required>
     </div>
   </div>
 </div>
@@ -20,7 +19,7 @@
   <div class="col-sm-2 col-sm-offset-1">
     <div class="form-group">
       <label for="street_number">Street Number:</label>
-      <input class="form-control input-lg" type="text" name="street_number">
+      <input class="form-control input-lg" type="text" name="street_number" required>
     </div>
   </div>
   <div class="col-sm-1">
@@ -39,13 +38,13 @@
   <div class="col-sm-2">
     <div class="form-group">
       <label for="street_name">Street Name:</label>
-      <input class="form-control input-lg" type="text" name="street_name">
+      <input class="form-control input-lg" type="text" name="street_name" required>
     </div>
   </div>
   <div class="col-sm-2">
     <div class="form-group">
       <label for="street_type">Street type:</label>
-      <select class="form-control input-lg" type="text" name="street_type">
+      <select class="form-control input-lg" type="text" name="street_type" required>
         <option value="" name=""></option>
         <option value="Street" name="Street">Street</option>
         <option value="Avenue" name="Avenue">Avenue</option>
@@ -56,14 +55,14 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-1 col-sm-offset-1">
+  <div class="col-sm-2 col-sm-offset-1">
     <div class="form-group">
       <label for="apt">Apartment Number:</label>
       <input class="form-control input-lg" type="text" name="apt">
     </div>
   </div>
 
-  <div class="col-sm-1">
+  <div class="col-sm-2">
     <div class="form-group">
       <label for="suite">Suite Number:</label>
       <input class="form-control input-lg" type="text" name="suite">
@@ -75,14 +74,14 @@
   <div class="col-sm-4 col-sm-offset-1">
     <div class="form-group">
       <label for="city">City:</label>
-      <input class="form-control input-lg" type="text" name="city">
+      <input class="form-control input-lg" type="text" name="city" value="<%= @place.city %>"required>
     </div>
   </div>
 
   <div class="col-sm-2">
     <div class="form-group">
       <label for="state">State:</label>
-      <input class="form-control input-lg" type="text" name="state">
+      <input class="form-control input-lg" type="text" name="state" value="<%= @place.state %>"required>
     </div>
   </div>
 </div>
@@ -91,31 +90,24 @@
   <div class="col-sm-2 col-sm-offset-1">
     <div class="form-group">
       <label for="zipcode">Zipcode:</label>
-      <input class="form-control input-lg" type="text" name="zipcode">
+      <input class="form-control input-lg" type="text" name="zipcode" value="<%= @place.zipcode %>">
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-1">
-    <button type='submit' class="btn btn-warning btn-block" style="margin-bottom: 40px"><h3>Edit this place</h3>
-    </button>
-  </div>
-</div>
-
 <div class="well">
+  <h3 class="col-sm-offset-1">Building Owner/Manager Contact Information (optional)</h3>
   <div class="row">
-    <h3 class="col-sm-offset-1">Optional: Please provide a building manager or contact</h3>
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_first_name">First Name of building contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_first_name">
+        <input class="form-control input-lg" type="text" name="contact_first_name" value="<%= @place.contact.first_name %>">
       </div>
     </div>
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_last_name">Last Name:</label>
-        <input class="form-control input-lg" type="text" name="contact_last_name">
+        <input class="form-control input-lg" type="text" name="contact_last_name" value="<%= @place.contact.last_name %>">
       </div>
     </div>
   </div>
@@ -123,27 +115,32 @@
     <div class="col-sm-4 col-sm-offset-1 ">
       <div class="form-group">
         <label for="contact_phone">Phone for contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_phone">
+        <input class="form-control input-lg" type="text" name="contact_phone" value="<%= @place.contact.phone_number %>">
       </div>
     </div>
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_email">Email for contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_email">
+        <input class="form-control input-lg" type="text" name="contact_email" value="<%= @place.contact.email_address %>">
       </div>
     </div>
   </div>
-</form>
-  <div class="col-sm-4 col-sm-offset-1">
-    <% if url.includes?("loggedin")%>
-      <form action="/loggedin/places/<%= @place.id() %>" method="post">
-    <% else %>
-      <form action="/places/<%= @place.id() %>" method="post">
-    <% end %>
-      <input type="hidden" name="_method" value="delete">
-      <button type='submit' class="btn btn-danger btn-block" style="margin-bottom: 40px"><h3>Delete this place</h3>
-      </button>
-    </form>
-  </div>
-
 </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <br><button type='submit' class="btn btn-warning btn-lg btn-block">Submit Changes</button>
+    </div>
+  </form>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+        <% if url.include?("loggedin")%>
+      <form action="/loggedin/places/<%= @place.id() %>" method="post">
+        <% else %>
+      <form action="/places/<%= @place.id() %>" method="post">
+        <% end %>
+        <input type="hidden" name="_method" value="delete">
+        <br><button type='submit' class="btn btn-danger btn-lg btn-block">Delete this place</button>
+      </form>
+    </div>
+  </div>

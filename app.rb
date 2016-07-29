@@ -99,8 +99,8 @@ post('/places/address') do
   street_direction = params['street_direction']
   street_type = params['street_type']
   address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
-
-  @@places = Place.where(address_line1: address.upcase())
+  address1 = address.upcase()
+  @@places = Place.where(address_line1: address1)
   if @@places != []
     redirect('/places')
   else

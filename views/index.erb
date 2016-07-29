@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1>Can I drink the water here?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
-  <div class="row">
+  <div class="row" id="first_page">
     <% if url.include?("loggedin") %>
       <form action="/loggedin/<%= @user.id() %>/places/name" method="post">
     <% else %>
@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="col-sm-3">
-      <button type='submit' class="btn btn-success btn-lg btn-block">Find Place</button>
+      <button type='submit' class="btn btn-success btn-lg btn-block">Find by Name</button>
     </div>
     </form>
   </div>
-  <div class= "row">
+  <div class= "row" id="first_page">
     <div class="col-sm-2">
       <% if url.include?("loggedin") %>
         <form action="/loggedin/<%= @user.id() %>/places/address" method="post">
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="col-sm-3">
-      <button type='submit' class="btn btn-success btn-lg btn-block">Find Address</button>
+      <button type='submit' class="btn btn-success btn-lg btn-block">Find by Address</button>
     </div>
     </form>
   </div>
@@ -72,6 +72,6 @@
 <div class="well">
   <div>
     <h1> Lead Lead Lead </h1>
-    <h2> Lorem ipsum  Lorem ipsum  Lorem ipsum  Lorem ipsum </h2> 
+    <h2> Lorem ipsum  Lorem ipsum  Lorem ipsum  Lorem ipsum </h2>
   </div>
 </div>
