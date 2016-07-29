@@ -1,2 +1,12 @@
 <h1><%= @user.user_name()%></h1>
 <h2>good luck with life</h2>
+<h2>places youre watching</h2>
+<% if @user.places.any?() %>
+  <ul>
+    <% @user.places.each() do |place| %>
+      <li><a href="/loggedin/<%= @user.id() %>/places/<%= place.id() %>"><%= place.name() %></a> current rating: <%= place.rating() %> <a href="/loggedin/<%= @user.id() %>/unwatch/<%= place.id() %>">unwatch</a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no places youre watching yet</p>
+<% end %>

@@ -1,6 +1,7 @@
 <div class="center">
   <h1 class="title"> <%= @place.name %> </h1>
-  <p class="address"><%= @place.address_line1 %>, <%= @place.address_line2 %>, <%= @place.city %>, <%= @place.state %><%= @place.zipcode %></p>
+  <p class="address"><%= @place.address_line1 %> <%= @place.address_line2 %><p>
+  <p><%= @place.city %>, <%= @place.state %> <%= @place.zipcode %></p>
 </div>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
@@ -20,7 +21,7 @@
       <% if @place.results().any?() %>
       <ul>
         <% @place.results.each do |result| %>
-        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>,
+        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: <%=result.user.user_name()%>
         <% if result.over_limit() %>
           Water from drinking faucet(s) or fountain(s) tested over the 15ppm EPA limit.
           <% else %>
@@ -38,7 +39,11 @@
 
   <div class="row">
     <div class="col-sm-2 col-sm-offset-2">
-      <p><a class="btn btn-success btn-lg btn-block" href="/result/<%= @place.id() %>/new">Add a testing result</a></p>
+      <% if url.include?("loggedin") %>
+        <p><a class="btn btn-success btn-lg btn-block" href="/loggedin/<%= @user.id() %>/result/<%= @place.id() %>/new">Add a testing result</a></p>
+      <% else %>
+        <p><a class="btn btn-success btn-lg btn-block" href="/login">log in to add a result</a></p>
+      <% end %>
     </div>
     <div class="col-sm-2">
       <p><a class="btn btn-warning btn-lg btn-block" href="/places/<%= @place.id() %>/edit">Edit place info</a></p>
@@ -50,6 +55,6 @@
       </form><br>
     </div>
     <div class="col-sm-2">
-      <p><a class="btn btn-primary btn-lg btn-block" href="/">Home</a></p>
+      <p><a class="btn btn-primary btn-lg btn-block" href="/loggedin/<%= @user.id() %>/watch/<%= @place.id() %>">Watch</a></p>
     </div>
   </div>

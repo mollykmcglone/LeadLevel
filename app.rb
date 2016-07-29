@@ -20,7 +20,6 @@ post('/user/new') do
   if password == password_confirmation
     user = User.new({:user_name => user_name, :password => password})
     if user.save()
-      User.create({:user_name => user_name, :password => password})
       erb(:index)
     else
       @error = "cannot save"
@@ -159,7 +158,6 @@ post("/places/new") do
   else
     address_line2 = nil
   end
-
   contact_email = params['contact_email']
   contact_phone = params['contact_phone']
   first_name = params['contact_first_name']
@@ -177,11 +175,61 @@ post("/places/new") do
   end
 end
 
+post("/loggedin/:id/places/new") do
+  id = params.fetch('id').to_i()
+  @user = User.find(id)
+  name = params['name']
+  street_number = params['street_number']
+  street_name = params['street_name']
+  street_direction = params['street_direction']
+  street_type = params['street_type']
+  apt = params['apt']
+  suite = params['suite']
+  city = params['city']
+  state = params['state']
+  zipcode = params['zipcode']
+  address = street_number.concat(" ").concat(street_direction).concat(" ").concat(street_name).concat(" ").concat(street_type)
+  if apt != nil
+    address_line2 = apt
+  elsif suite != nil
+    address_line2 = suite
+  else
+    address_line2 = nil
+  end
+  contact_email = params['contact_email']
+  contact_phone = params['contact_phone']
+  first_name = params['contact_first_name']
+  last_name = params['contact_last_name']
+  @new_contact = Contact.new(email_address: contact_email, phone_number: contact_phone, first_name: first_name, last_name: last_name)
+  @new_contact.save()
+  contact_id = @new_contact.id()
+  @new_place = Place.new({name: name, address_line1: address, address_line2: address_line2, city: city, state: state, zipcode: zipcode, contact_id: contact_id, :user_id => id})
+  @new_place.save()
+  if @new_place.save()
+    redirect("/loggedin/#{@user.id()}/places/".concat(@new_place.id().to_s()))
+  else
+    @error = 'something went wrong with the saving process'
+    erb(:errors)
+  end
+end
+
+get('/loggedin/:user_id/places/:id') do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
+  @place = Place.find(params['id'].to_i())
+  users = User.all()
+  @users = []
+  users.each() do |user|
+    @users.push(user.user_name())
+  end
+  erb(:place)
+end
+
 get('/logout') do
   erb(:loggedout)
 end
 
-get('/loggedin/profile/:id') do
+get('/loggedin/:id/profile') do
   id = params.fetch('id').to_i()
   @user = User.find(id)
   @places = @user.places()
@@ -189,6 +237,13 @@ get('/loggedin/profile/:id') do
 end
 
 get ('/result/:id/new') do
+  @place = Place.find(params['id'].to_i())
+  erb(:result_form)
+end
+
+get ('/loggedin/:user_id/result/:id/new') do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
   @place = Place.find(params['id'].to_i())
   erb(:result_form)
 end
@@ -211,4 +266,44 @@ post('/result/:id') do
   else
     erb(:errors)
   end
+end
+
+post('/loggedin/:user_id/result/:id') do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
+  test_date = params['test_date']
+  lab = params['lab']
+  over_limit = params['over_limit']
+  @place = Place.find(params['id'].to_i())
+  @result = Result.new({test_date: test_date, lab: lab, over_limit: over_limit, place_id: @place.id, user_id: @user.id()})
+  if @result.save()
+    if @result.over_limit == false
+      @place.rating = "green"
+      @place.save()
+    else
+      @place.rating = "red"
+      @place.save()
+    end
+    redirect("/loggedin/#{id}/places/".concat(@place.id().to_s()))
+  else
+    erb(:errors)
+  end
+end
+
+get('/loggedin/:user_id/watch/:id') do
+  id = params.fetch('user_id').to_i()
+  place = Place.find(params['id'].to_i())
+  user = User.find(id)
+  if !user.places.include?(place)
+    user.places.push(place)
+  end
+  redirect("/loggedin/#{id}/profile")
+end
+
+get('/loggedin/:user_id/unwatch/:id') do
+  id = params.fetch('user_id').to_i()
+  place = Place.find(params['id'].to_i())
+  user = User.find(id)
+  user.places.delete(place)
+  redirect("/loggedin/#{id}/profile")
 end
