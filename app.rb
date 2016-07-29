@@ -136,6 +136,14 @@ delete('/places/:id') do
   redirect('/')
 end
 
+delete('/loggedin/:user_id/places/:id') do
+  id = params.fetch('user_id').to_i()
+  @user = User.find(id)
+  place = Place.find(params.fetch('id').to_i)
+  place.destroy()
+  redirect("/loggedin/#{@user.id()}")
+end
+
 get("/loggedin/:user_id/places/:id/edit") do
   id = params.fetch('user_id').to_i()
   @user = User.find(id)
