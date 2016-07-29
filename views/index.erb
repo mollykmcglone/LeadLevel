@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1>Can I drink the water?</h1>
+  <h1>Can I drink the water here?</h1>
   <p class= "lead">Search or share lead testing results for your house, apartment, school, or office building.</p>
   <div class="row">
     <% if url.include?("loggedin") %>
@@ -9,33 +9,33 @@
     <% end %>
     <div class="col-sm-6 col-sm-offset-2">
       <div class="form-group">
-        <label for="name">Search by Place Name:</label>
-        <input class="form-control input-lg" type="text" name="name">
+        <label for="name" class="sr-only">Search by Place Name:</label>
+        <input class="form-control input-lg" type="text" name="name" placeholder="Enter the name of a public place">
       </div>
     </div>
-    <div class="col-sm-2">
-      <br><button type='submit' class="btn btn-success btn-lg btn-block">Find this Place</button>
+    <div class="col-sm-3">
+      <button type='submit' class="btn btn-success btn-lg btn-block">Find Place</button>
     </div>
     </form>
   </div>
   <div class= "row">
-    <div class="col-sm-2 col-sm-offset-1">
+    <div class="col-sm-2">
       <% if url.include?("loggedin") %>
         <form action="/loggedin/<%= @user.id() %>/places/address" method="post">
       <% else %>
         <form action="/places/address" method="post">
       <% end %>
       <div class="form-group">
-        <label for="street_number">Street Number:</label>
-        <input class="form-control input-lg" type="text" name="street_number">
+        <label for="street_number"class="sr-only">Street Number:</label>
+        <input class="form-control input-lg" type="text" name="street_number" placeholder="Street Number">
       </div>
     </div>
 
-    <div class="col-sm-1">
+    <div class="col-sm-2">
       <div class="form-group">
-        <label for="street_direction">Direction:</label>
-        <select class="form-control input-lg" type="text" name="street_direction">
-          <option value="" name=""></option>
+        <label for="street_direction" class="sr-only">Direction:</label>
+        <select class="form-control input-lg" type="text" name="street_direction" placeholder="Direction">
+          <option value="" selected disabled>Direction</option>
           <option value="SE" name="SE">SE</option>
           <option value="NE" name="NE">NE</option>
           <option value="SW" name="SW">SW</option>
@@ -47,25 +47,31 @@
 
     <div class="col-sm-2">
       <div class="form-group">
-        <label for="street_name">Street Name:</label>
-        <input class="form-control input-lg" type="text" name="street_name">
+        <label for="street_name" class="sr-only">Street Name:</label>
+        <input class="form-control input-lg" type="text" name="street_name" placeholder="Street Name">
       </div>
     </div>
 
-    <div class="col-sm-1">
+    <div class="col-sm-2">
       <div class="form-group">
-        <label for="street_type">Street type:</label>
+        <label for="street_type" class="sr-only">Street type:</label>
         <select class="form-control input-lg" type="text" name="street_type">
-          <option value="" name=""></option>
+          <option value="" selected disabled>Type</option>
           <option value="Street" name="Street">Street</option>
           <option value="Avenue" name="Avenue">Avenue</option>
           <option value="Court" name="Court">Court</option>
         </select>
       </div>
     </div>
-    <div class="col-sm-2">
-      <br><button type='submit' class="btn btn-success btn-lg btn-block">Find this Address</button>
+    <div class="col-sm-3">
+      <button type='submit' class="btn btn-success btn-lg btn-block">Find Address</button>
     </div>
     </form>
+  </div>
+</div>
+<div class="well">
+  <div>
+    <h1> Lead Lead Lead </h1>
+    <h2> Lorem ipsum  Lorem ipsum  Lorem ipsum  Lorem ipsum </h2> 
   </div>
 </div>
