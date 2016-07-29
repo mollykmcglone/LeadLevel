@@ -1,5 +1,23 @@
 .jumbotron {
+  background: url('../img/water.jpg') center center;
+  background-size: cover;
+  background-color: inherit;
   text-align: center;
+  color: black;
+}
+
+.jumbotron p {
+  font-weight: bold;
+}
+.jumbotron h1 {
+  font-size: 6em;
+  color: black;
+}
+
+@media (max-width: 992px){
+  img {
+    display: none;
+  }
 }
 
 .footer {
@@ -25,4 +43,8 @@
 
 #yellow {
   color: #ffcc00;
+}
+
+.row {
+  margin-top: 3em;
 }
