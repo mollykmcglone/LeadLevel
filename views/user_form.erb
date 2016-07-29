@@ -1,12 +1,20 @@
-<h1></h1>
-<form action="/user/new" method="post">
-  <label>choose a user name:</label>
-  <input type="text" name="user_name">
-  <label>choose a password</label>
-  <input type="text" name="password">
-  <label>reenter password</label>
-  <input type="text" name="password_confirmation">
+<h1 class="center">Create an account:</h1>
 
-  <button type="submit" name="button" class="btn-lg">Submit</button>
-
-</form>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+  <form action="/user/new" method="post">
+    <div class= "form-group">
+      <label>Choose a User Name:</label>
+      <input type="text" name="user_name" class="form-control input-lg">
+    </div>
+    <div class= "form-group">
+      <label>Choose a Password:</label>
+      <input type="password" name="password" class="form-control input-lg">
+    </div>
+    <div class= "form-group">
+      <label>Re-enter Password:</label>
+      <input type="password_confirmation" name="password_confirmation" class="form-control input-lg">
+    </div>
+  <button type="submit" name="button" class="btn btn-success btn-lg btn-block">Submit</button>
+  </form>
+</div>

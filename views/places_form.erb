@@ -1,6 +1,5 @@
-<h1> We don't have information about that address yet.</h1>
-<h2>Add the place to our database</h2>
-
+<h1 class="center title">That's not in our database yet!</h1>
+<h2 class="center"> Please take a moment to add it.</h2>
 
 <div class= "row">
   <div class="col-sm-4 col-sm-offset-1">
@@ -10,7 +9,7 @@
       <form action="/places/new" method="post">
     <% end %>
     <div class="form-group">
-      <label for="name">Name (if it is a business, school or other public buildings):</label>
+      <label for="name">Name (only if it is a business, school or other public buildings):</label>
       <input class="form-control input-lg" type="text" name="name" required>
     </div>
   </div>
@@ -96,15 +95,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-1">
-    <br><button type='submit' class="btn btn-success btn-lg" style="margin-bottom: 40px">Create this place
-    </button>
-  </div>
-
-</div>
-
 <div class="well">
+  <h3 class="col-sm-offset-1">Building Owner/Manager Contact Information (optional)</h3>
   <div class="row">
     <div class="col-sm-4 col-sm-offset-1 ">
       <div class="form-group">
@@ -133,5 +125,10 @@
       </div>
     </div>
   </div>
-</form>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <br><button type='submit' class="btn btn-success btn-lg btn-block">Submit</button>
+    </div>
+  </div>
+  </form>
 </div>

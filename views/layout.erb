@@ -20,9 +20,9 @@
           <% end %>
         </ul>
         <% if url.include?("loggedin") %>
-          <h3><a href="/loggedin/<%= @user.id() %>">Lead Level</a></h3>
+          <h2><a href="/loggedin/<%= @user.id() %>">Lead Level</a></h2>
         <% else %>
-          <h3><a href="/">Lead Level</a></h3>
+          <h2><a href="/">Lead Level</a></h2>
         <% end %>
       </header>
       <div class="pages">
