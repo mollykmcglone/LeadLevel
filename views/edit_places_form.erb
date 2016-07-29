@@ -1,11 +1,14 @@
 <h1>We don't have information about that address yet.</h1>
 <h2 class="col-sm-offset-1">Please add this place to our database</h2>
 
-
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
-      <form action="/places/<%= @place.id() %>/edit" method="post">
-      <input type="hidden" name="_method" value="patch">
+      <% if url.includes?("loggedin")%>
+        <form action="/loggedin/places/<%= @place.id() %>/edit" method="post">
+      <% else %>
+        <form action="/places/<%= @place.id() %>/edit" method="post">
+      <% end %>
+        <input type="hidden" name="_method" value="patch">
     <div class="form-group">
       <label for="name">Name (if it is a business, school or other public buildings):</label>
       <input class="form-control input-lg" type="text" name="name" required>
@@ -98,13 +101,6 @@
     <button type='submit' class="btn btn-warning btn-block" style="margin-bottom: 40px"><h3>Edit this place</h3>
     </button>
   </div>
-  <div class="col-sm-4 col-sm-offset-1">
-    <form action="/places/<%= @place.id() %>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button type='submit' class="btn btn-danger btn-block" style="margin-bottom: 40px"><h3>Delete this place</h3>
-      </button>
-    </form>
-  </div>
 </div>
 
 <div class="well">
@@ -138,5 +134,16 @@
     </div>
   </div>
 </form>
+  <div class="col-sm-4 col-sm-offset-1">
+    <% if url.includes?("loggedin")%>
+      <form action="/loggedin/places/<%= @place.id() %>" method="post">
+    <% else %>
+      <form action="/places/<%= @place.id() %>" method="post">
+    <% end %>
+      <input type="hidden" name="_method" value="delete">
+      <button type='submit' class="btn btn-danger btn-block" style="margin-bottom: 40px"><h3>Delete this place</h3>
+      </button>
+    </form>
+  </div>
 
 </div>
