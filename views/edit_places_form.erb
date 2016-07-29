@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
       <% if url.include?("loggedin")%>
-        <form action="/loggedin/places/<%= @place.id() %>/edit" method="post">
+        <form action="/loggedin/<%= @user.id() %>/places/<%= @place.id() %>/edit" method="post">
       <% else %>
         <form action="/places/<%= @place.id() %>/edit" method="post">
       <% end %>
