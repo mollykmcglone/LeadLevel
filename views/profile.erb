@@ -1,12 +1,89 @@
-<h1><%= @user.user_name()%></h1>
-<h2>good luck with life</h2>
-<h2>places youre watching</h2>
-<% if @user.places.any?() %>
-  <ul>
+<div class="row">
+  <h1 class="center"><%= @user.user_name() %>'s Profile</h1>
+</div>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Your Contact Information:</h2>
+    </div>
+  </div>
+  <% if @user.contact %>
+  <div class="row">
+    <div class="col-sm-6">
+    <h3>Name: <%= @user.contact.first_name if @user.contact.first_name %> <%= @user.contact.last_name if @user.contact.last_name %></h3>
+    <h3>Email: <%= @user.contact.email_address if @user.contact.email_address %></h3>
+    <h3>Phone: <%= @user.contact.phone_number if @user.contact.phone_number %></h3>
+    </div>
+  </div>
+  <% else %>
+  <div class="row">
+    <div class="col-sm-offset-1">
+      <h3>We don't have any contact info for you. Please update your profile (optional).</h3>
+    </div>
+  </div>
+  <form action="/loggedin/<%= @user.id() %>/contact" method="post">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-1">
+      <div class="form-group">
+        <label for="contact_first_name">First Name:</label>
+        <input class="form-control input-lg" type="text" name="contact_first_name">
+      </div>
+    </div>
+    <div class="col-sm-4 col-sm-offset-1">
+      <div class="form-group">
+        <label for="contact_last_name">Last Name:</label>
+        <input class="form-control input-lg" type="text" name="contact_last_name">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-1 ">
+      <div class="form-group">
+        <label for="contact_phone">Phone Number:</label>
+        <input class="form-control input-lg" type="text" name="contact_phone">
+      </div>
+    </div>
+    <div class="col-sm-4 col-sm-offset-1">
+      <div class="form-group">
+        <label for="contact_email">Email address:</label>
+        <input class="form-control input-lg" type="text" name="contact_email">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <br><button type='submit' class="btn btn-warning btn-lg btn-block">Submit</button>
+    </div>
+  </div>
+  </form>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Places You're Watching:</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-1">
+    <% if @user.places.any?() %>
+    <ul>
     <% @user.places.each() do |place| %>
-      <li><a href="/loggedin/<%= @user.id() %>/places/<%= place.id() %>"><%= place.name() %></a> current rating: <%= place.rating() %> <a href="/loggedin/<%= @user.id() %>/unwatch/<%= place.id() %>">unwatch</a></li>
+      <li><a href="/loggedin/<%= @user.id() %>/places/<%= place.id() %>"><%= place.name() %></a> Current Rating:
+        <% if place.rating() %>
+        <%= place.rating() %>
+        <% else %>
+        Not yet rated
+        <% end %>
+        <a href="/loggedin/<%= @user.id() %>/unwatch/<%= place.id() %>">Unwatch</a></li>
     <% end %>
-  </ul>
-<% else %>
-  <p>There are no places youre watching yet</p>
-<% end %>
+    </ul>
+    <% else %>
+    <h3>You don't have any places on your watch list yet... you should add some!</h3>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <button class="btn btn-success btn-lg btn-block"><a href="/loggedin/<%= @user.id() %>"</a>Search for Places to Watch </button>
+  <div>
+</div>

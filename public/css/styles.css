@@ -6,14 +6,6 @@
   color: black;
 }
 
-.jumbotron p {
-  font-weight: bold;
-}
-/*.jumbotron h1 {
-  font-size: 4em;
-  color: black;
-}*/
-
 @media (max-width: 992px){
   img {
     display: none;
@@ -44,8 +36,12 @@
   margin-top: 1em;
 }
 
-#first_page {
+#first_page_top {
   margin-top: 2em;
+}
+
+#first_page_bottom {
+  margin-bottom: 1em;
 }
 
 html {
@@ -64,4 +60,12 @@ body {
   height: 60px;
   background-color: #f5f5f5;
   text-align: center;
+}
+
+ol {
+  font-size: 1.5em;
+}
+
+ul {
+  font-size: 1.5em;
 }

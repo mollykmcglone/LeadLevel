@@ -2,10 +2,10 @@ require('spec_helper')
 
 describe(User) do
   describe('#contact') do
-    it("belongs to a contact") do
+    it("has one contact") do
       test_user = User.create({:user_name => "Molly", :password => "password"})
       test_contact = Contact.create({:email_address => "Molly@gmail.com", :user_id => test_user.id()})
-      expect(test_user.contacts()).to(eq([test_contact]))
+      expect(test_user.contact()).to(eq(test_contact))
     end
   end
 

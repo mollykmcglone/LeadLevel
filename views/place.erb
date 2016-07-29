@@ -1,35 +1,35 @@
 <div class="center">
   <h1 class="title"> <%= @place.name %> </h1>
-  <p class="address"><%= @place.address_line1 %> <%= @place.address_line2 %><p>
+  <p><%= @place.address_line1 %> <%= @place.address_line2 %><p>
   <p><%= @place.city %>, <%= @place.state %> <%= @place.zipcode %></p>
 </div>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <h2 class="center">Should you drink here?</h2>
       <% if @place.rating == "red" %>
-        <h3 class="center" id="red">No! The drinking water here has dangerous levels of lead.</h3>
+        <h2 class="center" id="red">No! The drinking water here has dangerous levels of lead.</h2>
       <% elsif @place.rating == 'green' %>
-        <h3 class="center" id="green">Go ahead! The drinking water has been tested and is safe.</h3>
+        <h2 class="center" id="green">Go ahead! The drinking water has been tested and is safe.</h2>
       <% else %>
-      <h3 class="center" id="yellow">Drink with caution- the water here hasn't been tested.</h3>
+      <h2 class="center" id="yellow">Drink with caution- the water here hasn't been tested.</h2>
       <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-10 col-sm-offset-1">
       <h2 class="center">Test Results:</h2>
       <% if @place.results().any?() %>
-      <ul>
+      <ol>
         <% @place.results.each do |result| %>
-        <li>Test Date: <%= result.test_date() %>, Tested at: <%= result.lab() %>, Test reported by: <%=result.user.user_name() if result.user%>
+        <li><strong>Test Date:</strong> <%= result.test_date() %>, <strong>Tested at:</strong> <%= result.lab() %>, <strong>Test reported by:</strong> <%= result.user.user_name() if result.user %>
         <% if result.over_limit() %>
-          Water from drinking faucet(s) or fountain(s) tested over the 15ppm EPA limit.
+          <br><strong>Analysis: </strong>Water from drinking fixtures tested over the 15ppm EPA limit for lead.
           <% else %>
-          Water from drinking faucet(s) or fountain(s) did not test over the 15ppm EPA limit.
+          <br><strong>Analysis: </strong>Water from drinking fixtures did not test over the 15ppm EPA limit.
         <% end %>
         </li>
         <% end %>
-      <ul>
+      <ol>
       <% else %>
       <p> There are no test results posted for this place yet.</p>
       <% end %>

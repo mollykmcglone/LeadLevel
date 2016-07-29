@@ -10,82 +10,41 @@
         <input type="hidden" name="_method" value="patch">
     <div class="form-group">
       <label for="name">Name (only if it's a business, school or public building):</label>
-      <input class="form-control input-lg" type="text" name="name" value="<%= @place.name %>" required>
+      <input class="form-control input-lg" type="text" name="name" value="<%= @place.name %>">
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-sm-2 col-sm-offset-1">
+  <div class="col-sm-6 col-sm-offset-1">
     <div class="form-group">
-      <label for="street_number">Street Number:</label>
-      <input class="form-control input-lg" type="text" name="street_number" required>
-    </div>
-  </div>
-  <div class="col-sm-1">
-    <div class="form-group">
-      <label for="street_direction">Direction:</label>
-      <select class="form-control input-lg" type="text" name="street_direction">
-        <option value="" name=""></option>
-        <option value="SE" name="SE">SE</option>
-        <option value="NE" name="NE">NE</option>
-        <option value="SW" name="SW">SW</option>
-        <option value="NW" name="NW">NW</option>
-        <option value="N" name="N">N</option>
-      </select>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="form-group">
-      <label for="street_name">Street Name:</label>
-      <input class="form-control input-lg" type="text" name="street_name" required>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="form-group">
-      <label for="street_type">Street type:</label>
-      <select class="form-control input-lg" type="text" name="street_type" required>
-        <option value="" name=""></option>
-        <option value="Street" name="Street">Street</option>
-        <option value="Avenue" name="Avenue">Avenue</option>
-        <option value="Court" name="Court">Court</option>
-      </select>
+      <label for="street_number">Street Address:</label>
+      <input class="form-control input-lg" type="text" name="street_number" value="<%= @place.address_line1 %>">
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-sm-2 col-sm-offset-1">
     <div class="form-group">
-      <label for="apt">Apartment Number:</label>
-      <input class="form-control input-lg" type="text" name="apt">
-    </div>
-  </div>
-
-  <div class="col-sm-2">
-    <div class="form-group">
-      <label for="suite">Suite Number:</label>
-      <input class="form-control input-lg" type="text" name="suite">
+      <label for="address_line2">Suite or Apartment Number:</label>
+      <input class="form-control input-lg" type="text" name="address_line2" value="<%= @place.address_line2 %>">
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
     <div class="form-group">
       <label for="city">City:</label>
-      <input class="form-control input-lg" type="text" name="city" value="<%= @place.city %>"required>
+      <input class="form-control input-lg" type="text" name="city" value="<%= @place.city %>">
     </div>
   </div>
-
   <div class="col-sm-2">
     <div class="form-group">
       <label for="state">State:</label>
-      <input class="form-control input-lg" type="text" name="state" value="<%= @place.state %>"required>
+      <input class="form-control input-lg" type="text" name="state" value="<%= @place.state %>">
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-sm-2 col-sm-offset-1">
     <div class="form-group">
@@ -94,20 +53,19 @@
     </div>
   </div>
 </div>
-
 <div class="well">
   <h3 class="col-sm-offset-1">Building Owner/Manager Contact Information (optional)</h3>
   <div class="row">
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_first_name">First Name of building contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_first_name" value="<%= @place.contact.first_name %>">
+        <input class="form-control input-lg" type="text" name="contact_first_name" value="<%= @place.contact.first_name if @place.contact %>">
       </div>
     </div>
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_last_name">Last Name:</label>
-        <input class="form-control input-lg" type="text" name="contact_last_name" value="<%= @place.contact.last_name %>">
+        <input class="form-control input-lg" type="text" name="contact_last_name" value="<%= @place.contact.last_name if @place.contact %>">
       </div>
     </div>
   </div>
@@ -115,13 +73,13 @@
     <div class="col-sm-4 col-sm-offset-1 ">
       <div class="form-group">
         <label for="contact_phone">Phone for contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_phone" value="<%= @place.contact.phone_number %>">
+        <input class="form-control input-lg" type="text" name="contact_phone" value="<%= @place.contact.phone_number if @place.contact %>">
       </div>
     </div>
     <div class="col-sm-4 col-sm-offset-1">
       <div class="form-group">
         <label for="contact_email">Email for contact:</label>
-        <input class="form-control input-lg" type="text" name="contact_email" value="<%= @place.contact.email_address %>">
+        <input class="form-control input-lg" type="text" name="contact_email" value="<%= @place.contact.email_address if @place.contact %>">
       </div>
     </div>
   </div>
